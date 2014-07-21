@@ -16,9 +16,11 @@ NEI.coalcomb <- NEI[NEI$SCC %in% SCC.coalcomb$SCC, ]
 
 # Calculate the sum of emissions per year
 data <- aggregate(Emissions ~ year, FUN=sum, na.rm=TRUE, data=NEI.coalcomb)
+model <- lm(Emissions ~ year, data)
 
 # Generate the plot
 png(file = "plot4.png")
 with(data, plot(year, Emissions, main=expression("Total Emissions from PM"[2.5]*" from Coal Combustion-related Sources"), xlab="Year", ylab="Total Emissions (tons)"))
+abline(model)
 dev.off()
 

@@ -16,8 +16,10 @@ NEI.onroad <- NEI[NEI$SCC %in% SCC.onroad$SCC, ]
 
 # Calculate the sum of emissions per year
 data <- aggregate(Emissions ~ year, FUN=sum, na.rm=TRUE, data=NEI.onroad[NEI.onroad$fips == "24510", ])
+model <- lm(Emissions ~ year, data)
 
 # Generate the plot
 png(file = "plot5.png")
 with(data, plot(year, Emissions, main=expression("Total Emissions from PM"[2.5]*" from Motor Vehicles in the Baltimore City"), xlab="Year", ylab="Total Emissions (tons)"))
+abline(model)
 dev.off()

@@ -15,6 +15,6 @@ SCC <- readRDS("Source_Classification_Code.rds")
 data <- aggregate(Emissions ~ year + type, FUN=sum, na.rm=TRUE, data=NEI[NEI$fips == "24510", ])
 
 # Generate the plot
-png(file = "plot3.png")
-qplot(year, Emissions, data = data, facets = . ~ type, main=expression("Total Emissions from PM"[2.5]*" in the Baltimore City, Maryland"), xlab="Year", ylab="Total Emissions (tons)")
+png(file = "plot3.png", width=600)
+qplot(year, Emissions, data = data, geom=c("point", "smooth"), method="lm", facets = . ~ type, main=expression("Total Emissions from PM"[2.5]*" in the Baltimore City, Maryland"), xlab="Year", ylab="Total Emissions (tons)")
 dev.off()

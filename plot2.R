@@ -10,8 +10,10 @@ SCC <- readRDS("Source_Classification_Code.rds")
 
 # Calculate the sum of emissions per year
 data <- aggregate(Emissions ~ year, FUN=sum, na.rm=TRUE, data=NEI[NEI$fips == "24510", ])
+model <- lm(Emissions ~ year, data)
 
 # Generate the plot
 png(file = "plot2.png")
 with(data, plot(year, Emissions, main=expression("Total Emissions from PM"[2.5]*" in the Baltimore City, Maryland"), xlab="Year", ylab="Total Emissions (tons)"))
+abline(model)
 dev.off()
